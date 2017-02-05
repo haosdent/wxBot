@@ -611,6 +611,8 @@ class WXBot:
         elif mtype == 47:
             msg_content['type'] = 6
             msg_content['data'] = self.search_content('cdnurl', content)
+            if msg_content['data'].startswith('http'):
+                msg_content['img'] = binascii.hexlify(self.session.get(msg_content['data']).content)
             if self.DEBUG:
                 log.info('    %s[Animation] %s' % (msg_prefix, msg_content['data']))
         elif mtype == 49:
